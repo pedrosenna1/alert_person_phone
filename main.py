@@ -34,17 +34,29 @@ while True:
     bboxsIdx = cv2.dnn.NMSBoxes(bboxs,confs,score_threshold=0.5, nms_threshold=0.3)
 
     if len(bboxsIdx) !=0:
+        person = set()
+        cell = set()
         for x in range(0,len(bboxsIdx)):
             bbox = bboxs[np.squeeze(bboxsIdx[x])]
             conf = confs[np.squeeze(bboxsIdx[x])]
             labelsID = np.squeeze(labels[np.squeeze(bboxsIdx[x])])-1
             label = classesList[labelsID]
 
-            print(bbox,labelsID,conf)
-            x,y,w,h = bbox
+            # print(bbox,labelsID,conf)
+            if label == "person":
+                x,y,w,h = bbox
 
-            cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),3)
-            cvzone.putTextRect(img,f'{label} {round(conf,2)}',(x,y-10),colorR=(255,0,0),scale=1,thickness=2)
+                cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),3)
+                cvzone.putTextRect(img,f'{label} {round(conf,2)}',(x,y-10),colorR=(255,0,0),scale=1,thickness=2)
+                person.add(label)
+            elif label == "cell phone":
+                x,y,w,h = bbox
+
+                cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),3)
+                cvzone.putTextRect(img,f'{label} {round(conf,2)}',(x,y-10),colorR=(255,0,0),scale=1,thickness=2)
+                cell.add(label)
+        if "person" in person and "cell phone" in cell:
+            print('alert!')
 
     cv2.imshow('Imagem',img)
 
