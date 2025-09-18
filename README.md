@@ -189,23 +189,9 @@ while True:
 
 ---
 
-## 🔒 Observação de licença do modelo
 
-Os pesos/arquivos do modelo e a lista de classes COCO possuem licenças próprias.  
-Confira os termos da fonte original antes de redistribuir.
 
----
 
-## 📜 Licença
 
-```
-MIT License © 2025 Seu Nome
-```
 
----
 
-## 🙌 Créditos
-
-- OpenCV DNN  
-- SSD MobileNet v3 (COCO)  
-- cvzone
